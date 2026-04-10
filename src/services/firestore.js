@@ -1,6 +1,6 @@
 /* firebase */
 import { initializeApp } from "firebase/app";
-import { getFirestore,collection,getDocs, query, where, addDoc } from "firebase/firestore";
+import { getFirestore,collection,getDocs, query, where, addDoc, doc, getDoc } from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -20,12 +20,12 @@ const db = getFirestore(app);
 
 async function getProducts() {
     const collectioRef = collection(db,"products");
-    const collectionSnap = getDocs(collectioRef)
+    const collectionSnap = await getDocs(collectioRef)
     
     const docsArray = collectionSnap.docs;
     const docsData = docsArray.map(item => {
         return{
-        id: id.data, ...item.data()
+        id: item.id, ...item.data()
         }
     })
     
@@ -35,7 +35,7 @@ async function getProducts() {
 
 async function getProductsById(idRequested) {
     const docRef = doc(db,"products", idRequested)
-    const docSnap =  await getDocs(docRef)
+    const docSnap =  await getDoc(docRef)
 
     return{
         id: docSnap.id,

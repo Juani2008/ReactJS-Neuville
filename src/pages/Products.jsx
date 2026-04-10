@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
+import { getProducts } from "../services/firestore";
+
 
 
 function ProductsPage() {
@@ -8,10 +10,15 @@ function ProductsPage() {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         getProducts().then((data) => {
+            console.log(data);
+            
             setProducts(data);
+            setLoading(false);
         });
     }, []);
-
+    if (loading) {
+    return <h2>Cargando...</h2>;
+}
     return(
         <div>
             {products.map((product)=>(

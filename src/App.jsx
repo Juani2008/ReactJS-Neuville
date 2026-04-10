@@ -11,34 +11,38 @@ import Cart from './pages/Cart'
 import NavBar from './components/Navbar'
 import Footer from './components/Footer'
 import ProductCard from './components/ProductCard'
-import ProductsPage from './pages/Products'
 import ProductDetail from './pages/ProductDetail'
+import CartProvider from './context/CartContext'
 
 
-import { getProducts } from './services/firestore'
+
 
 
 function App() {
-  getProducts()
   return (
   
     <>
+      
+      <CartProvider>
+        <NavBar/>
+        
+            <Routes>
+              <Route path="/" element={<Home />} />
 
-    
-    {/* <NavBar/>
-    
-        <Routes>
-          <Route path="/" element={<Home />} />
+              <Route path="/products/:id" element={<ProductDetail />} />
 
-          <Route path="/products" element={<Products />} />
+              <Route path="/products" element={<Products />} />
 
-          <Route path="/cart" element={<Cart />} />
+              <Route path="/cart" element={<Cart />} />
+              
+            </Routes>
 
-          <Route path="/products/:id" element={<ProductDetail />} />
-          
-        </Routes>
+        <Footer/>
+      </CartProvider>
+      
+      
 
-      <Footer/> */}
+
 
     </> 
       

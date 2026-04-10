@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function ProductCard({ product }) {
     return (
         <div>
-            <img src={product.imagen} alt={product.tipo} />
+            <img src={product.img} alt={product.tipo} />
             <h2>{product.marca} {product.tipo}</h2>
             <p>${product.precio}</p>
             <p>Stock: {product.stock}</p>
