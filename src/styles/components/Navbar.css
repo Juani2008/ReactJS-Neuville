@@ -1,0 +1,35 @@
+.navbar {
+  background-color: #ffe600;
+  padding: 12px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* izquierda */
+.left {
+  display: flex;
+  gap: 20px;
+}
+
+/* links */
+.link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+/* carrito */
+.cartNavbar {
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* numerito */
+.count {
+  font-weight: bold;
+}

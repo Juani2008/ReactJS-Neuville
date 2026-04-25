@@ -2,6 +2,8 @@ import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { getProductsById } from "../services/firestore";
 import { CartContext } from "../context/CartContext";
+import "../styles/pages/ProductsDetail.css"
+
 
 function ProductDetail() {
     const { id } = useParams();
@@ -17,12 +19,31 @@ function ProductDetail() {
         return <h2>Cargando...</h2>
 }
     return (
-        <div>
-            <img src={product.img} alt={product.tipo} />
-            <h2>{product.marca} {product.tipo}</h2>
-            <p>${product.precio}</p>
-            <p>Stock: {product.stock}</p>
-            <button onClick={()=> addToCart(product)}>Agregar al Carrito</button>
+        <div className="detail">
+
+            <div className="detailContainer">
+
+                <div className="img">
+                    <img src={product.img} alt={product.tipo} />
+                </div>
+                <div className="info">
+
+                    <h2 className="title">{product.marca} {product.tipo}</h2>
+
+                    <p className="price">${product.precio}</p>
+
+                    <p className="stock">Stock: {product.stock}</p>
+
+                    {product.stock === 0 ? (
+                        <p className="noStock">Producto agotado</p>
+                    ) : (
+                        <button className="addToCart" onClick={() => addToCart(product)}>
+                            Agregar al Carrito
+                        </button>
+                    )}
+
+                </div>
+            </div>
         </div>
     )
 }

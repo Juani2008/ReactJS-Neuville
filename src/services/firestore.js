@@ -58,14 +58,9 @@ async function getProductsByCategory(categoryReq) {
 
 
 async function createOrder(orderData) {
-    /* const orderData = {
-        buyer: {name: "Santiago" , tel: "123456" },
-        date: new Date(),
-        items:
-       esto va en la logica del cartcontainer
-    } */
-   const collectionOrdersRef = collection(db, "orders");
-    const resp= await addDoc(collectionOrdersRef, orderData)
+    const ordersRef = collection(db,"orders");
+    const docRef = await addDoc(ordersRef, orderData);
+    return docRef.id
 }
 
 async function exportToFirestore(params) {

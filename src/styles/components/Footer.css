@@ -1,0 +1,25 @@
+.footer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #ffe600;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.RS{
+    display: flex;
+    gap: 10px;
+}
+.RS p{
+    font-size: 14px;
+    color: black;
+}
+
+.imgRS{
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+}

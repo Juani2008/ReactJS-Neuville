@@ -1,0 +1,28 @@
+.home {
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-container {
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  width: 400px;
+}
+
+/* título */
+.home-header {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* texto */
+.home-content {
+  color: gray;
+  margin-bottom: 20px;
+}
+

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import { getProducts } from "../services/firestore";
-
+import "../styles/pages/Products.css"
 
 
 function ProductsPage() {
@@ -20,7 +20,7 @@ function ProductsPage() {
     return <h2>Cargando...</h2>;
 }
     return(
-        <div>
+        <div className="productsContainer">
             {products.map((product)=>(
                 <ProductCard key={product.id} product={product} />
             )
