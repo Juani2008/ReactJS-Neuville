@@ -1,60 +1,33 @@
-import { useContext } from "react"
-import { CartContext } from "../context/CartContext"
-import "../styles/pages/Cart.css"
-import { createOrder } from "../services/firestore";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
+import "../styles/pages/Cart.css";
+import Swal from "sweetalert2";
 
 function Cart() {
-  const { cart, removeFromCart, clearCart } = useContext(CartContext);
-
-  const buyCart = async () => {
-            const order = {
-                items: cart.map(item => ({
-                    id: item.id,
-                    marca: item.marca,
-                    tipo: item.tipo,
-                    precio: item.precio,
-                    quantity: item.quantity
-                })),
-                total: totalCart,
-                date: new Date(),
-            };
-            try{
-                const orderId = await createOrder(order);
-                console.log("orden creada con el ID:", orderId);
-                clearCart();
-            } catch (error) {
-                console.error("Error al crear la orden:", error);
-            }
-
-            try {
-                const orderId = await createOrder(order);
-                clearCart();
-                alert("Compra finalizada. ID de la orden: " + orderId);
-            } catch (error) {
-                console.error("Error al crear la orden:", error);
-                alert("Error al finalizar la compra.");
-            }
-        };
-
-  if (cart.length === 0) {
-    return <h2 className="cartEmpty">Carrito vacío</h2>;
-  }
+  const { cart, removeFromCart, clearCart, buyCart } = useContext(CartContext);
 
   const totalCart = cart.reduce(
     (acc, item) => acc + item.precio * item.quantity,
     0
   );
 
+  const handleBuy = async () => {
+    const orderId = await buyCart();
+
+    Swal.fire({
+      icon: "success",
+      title: "Compra realizada",
+      text: `Tu número de orden es: ${orderId}`,
+    });
+  };
+
   return (
     <div className="cart">
-
       <div className="cartContainer">
 
-        {/* productos */}
         <div className="cartProducts">
           {cart.map((product) => (
             <div key={product.id} className="item">
-
               <img src={product.img} alt={product.tipo} />
 
               <div className="info">
@@ -69,13 +42,10 @@ function Cart() {
               >
                 Eliminar
               </button>
-
-              
             </div>
           ))}
         </div>
 
-        {/* resumen */}
         <div className="total">
           <h2>Total: ${totalCart}</h2>
 
@@ -83,15 +53,12 @@ function Cart() {
             Vaciar carrito
           </button>
 
-          <button className="buyCart"
-              onClick={buyCart}
-              >
-            Finalizar Compra      
+          <button className="buyCart" onClick={handleBuy}>
+            Finalizar Compra
           </button>
         </div>
 
       </div>
-
     </div>
   );
 }
